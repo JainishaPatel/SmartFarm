@@ -1,10 +1,16 @@
+import os
 import pandas as pd
+from dotenv import load_dotenv
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 
+load_dotenv()
+
+DATA_PATH = os.getenv("DATASET_PATH")
+
 # 1. Load dataset
-df = pd.read_csv(r"C:\Users\Jainisha.LAPTOP-94L8ASEJ\OneDrive\Desktop\SmartFarm\crop_data.csv")
+df = pd.read_csv(DATA_PATH)
 
 # 2. Encode Season, State, and Crop using LabelEncoder
 season_encoder = LabelEncoder()
