@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Market Rates | SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/market_rates.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="market-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">📈 Live Market Rates</h2>
+    <p class="text-center text-muted">Prices are fetched daily from verified sources</p>
+
+    <div class="table-responsive mt-4">
+      <table class="table table-striped table-hover text-center">
+        <thead class="table-success">
+          <tr>
+            <th>Crop</th>
+            <th>Location</th>
+            <th>Min Price (₹)</th>
+            <th>Max Price (₹)</th>
+            <th>Modal Price (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="marketTableBody">
+          <!-- Data dynamically inserted via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/market_rates.js') }}"></script>
+{% endblock %}

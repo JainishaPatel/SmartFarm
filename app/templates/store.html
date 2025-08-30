@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Farming Store | SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/store.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container my-5">
+  <h2 class="text-center mb-4">🛒 Farming Input Store</h2>
+
+  <div class="row">
+    {% for item in store_items %}
+    <div class="col-md-4 mb-4">
+      <div class="card store-card shadow-sm">
+        <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p><strong>Price:</strong> ₹{{ item.price }}</p>
+          <button class="btn btn-primary buy-btn"
+                  data-name="{{ item.name }}"
+                  data-price="{{ item.price }}">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Purchase Modal -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <h5>🧾 Confirm Purchase</h5>
+      <p><strong>Product:</strong> <span id="purchaseProduct"></span></p>
+      <p><strong>Price:</strong> ₹<span id="purchasePrice"></span></p>
+      <form id="purchaseForm">
+        <label>Full Name</label>
+        <input type="text" class="form-control" required><br>
+        <label>Address</label>
+        <textarea class="form-control" required></textarea><br>
+        <label>Phone</label>
+        <input type="text" class="form-control" required><br>
+        <button type="submit" class="btn btn-success">Place Order</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/store.js') }}"></script>
+{% endblock %}

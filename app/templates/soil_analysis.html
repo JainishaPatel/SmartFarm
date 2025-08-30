@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Soil Analysis | SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/soil_analysis.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container my-5">
+  <h2 class="text-center mb-3">🧪 Soil Analysis Guide</h2>
+  <p class="text-center text-muted">Know your soil. Grow better crops.</p>
+
+  <!-- Cards Row -->
+  <div class="row g-4 mt-4">
+    <!-- Soil Types -->
+    <div class="col-12">
+      <div class="card shadow-sm border-success">
+        <div class="card-body">
+          <h5 class="card-title text-center">🧱 Soil Types</h5>
+          <img src="{{ url_for('static', filename='assets/soilTypes.png') }}" alt="Soil Types" class="img-fluid mb-4 rounded soil-types-img">
+          <hr>
+
+          <ul class="soil-list no-bullets">
+            <li class="soil-item">
+              <strong>Sandy Soil</strong><br>Dries quickly, low nutrients
+              <br>
+              <img src="{{ url_for('static', filename='assets/sandySoil.png') }}" alt="Sandy" class="soil-img">
+            </li>
+            <li class="soil-item">
+              <strong>Clay Soil</strong><br>Holds water, high nutrients
+              <br>
+              <img src="{{ url_for('static', filename='assets/claySoil.png') }}" alt="Clay" class="soil-img">
+            </li>
+            <li class="soil-item">
+              <strong>Loamy Soil</strong><br>Best for farming, balanced mix
+              <br>
+              <img src="{{ url_for('static', filename='assets/loamSoil.png') }}" alt="Loamy" class="soil-img">
+            </li>
+            <li class="soil-item">
+              <strong>Silty Soil</strong><br>Soft, retains moisture, needs drainage
+              <br>
+              <img src="{{ url_for('static', filename='assets/siltSoil.png') }}" alt="Silty" class="soil-img">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fertility Tips -->
+    <div class="col-12">
+      <div class="card shadow-sm border-info mt-4">
+        <div class="card-body">
+          <h5 class="card-title">🌾 Soil Fertility Tips</h5>
+          <ul>
+            <li>Use compost and green manure</li>
+            <li>Check pH level (6.0 – 7.5 is ideal)</li>
+            <li>Test for NPK:
+              <ul>
+                <li><strong>N (Nitrogen):</strong> Leaf growth</li>
+                <li><strong>P (Phosphorus):</strong> Root and flower growth</li>
+                <li><strong>K (Potassium):</strong> Crop resistance & health</li>
+              </ul>
+            </li>
+            <li>Rotate crops to maintain nutrients</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Soil Type Selector -->
+  <div class="mt-5 text-center">
+    <h4 class="mb-3">🔍 Identify Your Soil Type</h4>
+    <form onsubmit="checkSoilType(event)" class="row g-3 justify-content-center">
+      <div class="col-auto">
+        <select id="texture" class="form-select" required>
+          <option value="">Select soil type</option>
+          <option value="sandy">Sandy</option>
+          <option value="clay">Clay</option>
+          <option value="loamy">Loamy</option>
+          <option value="silty">Silty</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-success">Check Info</button>
+      </div>
+    </form>
+    <div class="mt-3">
+      <div id="soilResult" class="alert alert-info d-none"></div>
+    </div>
+  </div>
+
+  <!-- Government Link -->
+  <div class="mt-4 text-center">
+    <a href="https://www.krishijagran.com/agripedia/soil-health-card/" target="_blank" class="btn btn-primary">
+      🧾 Check Soil Health Card (Govt Website)
+    </a>
+  </div>
+
+  <!-- FAQ
+  <div class="mt-5">
+    <h4 class="text-center mb-3">📌 Common Questions</h4>
+    <div class="accordion" id="soilFAQ">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q1">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#a1">
+            Why is soil testing important?
+          </button>
+        </h2>
+        <div id="a1" class="accordion-collapse collapse show" data-bs-parent="#soilFAQ">
+          <div class="accordion-body">
+            Testing helps choose the right crop and fertilizer for your land.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="q2">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">
+            What is the best soil pH?
+          </button>
+        </h2>
+        <div id="a2" class="accordion-collapse collapse" data-bs-parent="#soilFAQ">
+          <div class="accordion-body">
+            Most crops grow well in pH 6.0 to 7.5.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/soil_analysis.js') }}"></script>
+{% endblock %}

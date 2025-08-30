@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Weather Updates - SmartFarm{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">🌤️ Weather Updates</h2>
+
+    <!-- City Search Form -->
+    <form method="GET" action="{{ url_for('main.weather_redirect') }}" class="mb-4 text-center">
+      <div class="input-group justify-content-center" style="max-width: 400px; margin: 0 auto;">
+        <input type="text" name="city" class="form-control" placeholder="Enter city name" required>
+        <button class="btn btn-primary" type="submit">Check Weather</button>
+      </div>
+    </form>
+
+    {% if weather %}
+      {% if weather.error %}
+        <div class="alert alert-danger text-center">{{ weather.error }}</div>
+      {% else %}
+        <h3 class="text-center mb-3">Weather in {{ weather.city }}</h3>
+        <div class="card mx-auto shadow-sm" style="max-width: 400px;">
+          <div class="card-body text-center">
+            <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@4x.png" alt="{{ weather.description }}">
+            <h4 class="mt-2">{{ weather.description }}</h4>
+            <br>
+            <p>🌡️ Temperature: {{ weather.temp }}°C</p>
+            <p>💧 Humidity: {{ weather.humidity }}%</p>
+            <p>🌬️ Wind: {{ weather.wind }} m/s</p>
+            <p>🌅 Sunrise: {{ weather.sunrise_time }} (IST)</p>
+            <p>🌇 Sunset: {{ weather.sunset_time }} (IST)</p> 
+            <hr>
+            <p>🌍 Country: {{ weather.country }}</p>
+            <p>📅 Date: {{ weather.date }}</p >
+            <p>🕒 Time: {{ weather.time }}</p>
+            <hr>
+            {% if recommendation %}
+              <div class="mt-3">
+                <h5>🌱 Smart Farming Advice:</h5>
+                <p>{{ recommendation }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

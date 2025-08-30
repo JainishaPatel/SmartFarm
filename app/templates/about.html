@@ -1,0 +1,45 @@
+<!-- templates/about.html -->
+{% extends "base.html" %}
+
+{% block title %}About | SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- About Section Content -->
+<section class="about-section py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">About SmartFarm</h2>
+    <p class="about-subtext text-center mb-5">
+      SmartFarm is a digital platform created to help farmers make smarter, data-driven decisions...
+    </p>
+
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="about-box bg-light p-4 rounded shadow">
+          <h4>📈 Data-Driven Farming</h4>
+          <p>Empowering farmers with actionable insights.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="about-box bg-light p-4 rounded shadow">
+          <h4>🤝 Government Support</h4>
+          <p>Up-to-date schemes and subsidies.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="about-box bg-light p-4 rounded shadow">
+          <h4>🌿 Sustainable Practices</h4>
+          <p>Eco-friendly and profitable methods.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/about.js') }}"></script>
+{% endblock %}

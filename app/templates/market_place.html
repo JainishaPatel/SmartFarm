@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Market Place | SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/market_place.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container my-5">
+  <h2 class="text-center mb-4">🌾 Welcome to SmartFarm Market Place</h2>
+
+  <!-- Product Cards -->
+  <div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+      <div class="market-card shadow">
+        <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="price">Price: ₹{{ item.price }}</p>
+          <p class="text-muted"><strong>Seller:</strong> {{ item.seller.name }}</p>
+          <p class="text-muted"><strong>Location:</strong> {{ item.seller.location }}</p>
+          <button class="btn btn-outline-primary contact-btn" 
+                  data-name="{{ item.seller.name }}" 
+                  data-email="{{ item.seller.email }}" 
+                  data-phone="{{ item.seller.phone }}">Contact Seller</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Selling Form -->
+  <div class="sell-form mt-5">
+    <h3 class="text-center">🧑‍🌾 Sell Your Product</h3>
+    <form id="sellForm" action="{{ url_for('main.sell_product') }}" method="POST" class="p-4 shadow rounded bg-light" novalidate>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Product Name</label>
+          <input type="text" name="name" class="form-control" required>
+          <div class="invalid-feedback">Please enter a product name.</div>
+
+          <label>Description</label>
+          <input type="text" name="description" class="form-control">
+
+          <label>Price (₹)</label>
+          <input type="number" name="price" class="form-control" required>
+          <div class="invalid-feedback">Please enter a valid price.</div>
+
+          <label>Image URL (optional)</label>
+          <input type="text" name="image_url" class="form-control">
+        </div>
+
+        <div class="col-md-6">
+          <label>Seller Name</label>
+          <input type="text" name="seller_name" class="form-control" required>
+          <div class="invalid-feedback">Please enter your name.</div>
+
+          <label>Email</label>
+          <input type="email" name="seller_email" class="form-control" required>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+
+          <label>Phone</label>
+          <input type="text" name="seller_phone" class="form-control" required>
+          <div class="invalid-feedback">Please enter a valid phone number.</div>
+
+          <label>Location</label>
+          <input type="text" name="seller_location" class="form-control" required>
+          <div class="invalid-feedback">Please enter your location.</div>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success">Post Product</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Contact Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <h5>📞 Contact Seller</h5>
+      <p><strong>Name:</strong> <span id="sellerName"></span></p>
+      <p><strong>Email:</strong> <span id="sellerEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="sellerPhone"></span></p>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/market_place.js') }}"></script>
+{% endblock %}

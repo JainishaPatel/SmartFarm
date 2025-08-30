@@ -1,0 +1,45 @@
+/* Government Schemes Page Styles */
+
+.scheme-card {
+  border: 2px solid #d4edda;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f9fdf9;
+}
+
+.scheme-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 128, 0, 0.15);
+}
+
+.scheme-card .card-body i {
+  color: #28a745;
+}
+
+.scheme-card h5 {
+  font-weight: bold;
+  color: #155724;
+}
+
+.scheme-card p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.scheme-card a.btn {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.scheme-card a.btn:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 767px) {
+  .scheme-card {
+    margin-bottom: 20px;
+  }
+}

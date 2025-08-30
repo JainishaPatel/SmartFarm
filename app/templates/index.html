@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}SmartFarm | Home{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<header class="hero-section text-white" style="background-image: url('{{ url_for('static', filename='assets/heroSection_image.png') }}');">
+  <!-- <img src="{{ url_for('static', filename='assets/heroSection_image.png') }}"> -->
+  <div class="hero-overlay">
+    <div class="container py-5 text-center">
+      <h1 class="display-5 fw-bold text-white animate-fade-slide">Empowering Farmers with Digital Tools</h1>
+      <p class="lead text-white animate-fade-delay">Get weather updates, crop info, market rates & more — all in one place.</p>
+      <a href="#features" class="btn btn-success btn-lg mt-3 animate-pop-in">Explore Features</a>
+    </div>
+  </div>
+</header>
+
+<!-- Features Section -->
+<section id="features" class="py-5 bg-light">
+  <div class="container">
+    
+    <div class="row g-4">
+      {% include 'partials/features.html' %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

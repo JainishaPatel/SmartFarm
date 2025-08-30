@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}IoT Dashboard - SmartFarm{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">IoT Sensor Dashboard</h2>
+    <p class="text-center text-muted mb-5">
+      Monitor real-time farm conditions like soil moisture, temperature, and humidity to make better farming decisions.
+    </p>
+
+    <div class="row g-4">
+      <!-- Soil Moisture Card -->
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <i class="fa-solid fa-water fa-2x text-success mb-2"></i>
+            <h5 class="card-title">Soil Moisture</h5>
+            <p class="card-text display-6" id="soilMoisture">--%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Temperature Card -->
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <i class="fa-solid fa-temperature-half fa-2x text-danger mb-2"></i>
+            <h5 class="card-title">Temperature</h5>
+            <p class="card-text display-6" id="temperature">--°C</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Humidity Card -->
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <i class="fa-solid fa-cloud-sun-rain fa-2x text-primary mb-2"></i>
+            <h5 class="card-title">Humidity</h5>
+            <p class="card-text display-6" id="humidity">--%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Chart Placeholder (Optional) -->
+    <div class="mt-5">
+      <h4 class="text-center mb-4">Live Sensor Trends</h4>
+      <canvas id="sensorChart" height="120"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- Simulated Live Sensor Data Script -->
+<script>
+  function simulateSensorData() {
+    document.getElementById('soilMoisture').textContent = `${Math.floor(30 + Math.random() * 40)}%`;
+    document.getElementById('temperature').textContent = `${(20 + Math.random() * 15).toFixed(1)}°C`;
+    document.getElementById('humidity').textContent = `${Math.floor(40 + Math.random() * 30)}%`;
+  }
+
+  setInterval(simulateSensorData, 3000); // Update every 3 seconds
+  simulateSensorData();
+</script>
+
+<!-- Chart.js Script for Live Trends (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('sensorChart').getContext('2d');
+  const sensorChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: Array.from({length: 10}, (_, i) => `T-${10 - i}s`),
+      datasets: [
+        {
+          label: 'Soil Moisture (%)',
+          data: Array.from({length: 10}, () => Math.floor(30 + Math.random() * 40)),
+          borderColor: 'green',
+          fill: false
+        },
+        {
+          label: 'Temperature (°C)',
+          data: Array.from({length: 10}, () => (20 + Math.random() * 15).toFixed(1)),
+          borderColor: 'red',
+          fill: false
+        },
+        {
+          label: 'Humidity (%)',
+          data: Array.from({length: 10}, () => Math.floor(40 + Math.random() * 30)),
+          borderColor: 'blue',
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      animation: false,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Optional: Live Update Chart Every Few Seconds
+  setInterval(() => {
+    sensorChart.data.datasets.forEach(dataset => {
+      dataset.data.shift();
+      dataset.data.push(Math.floor(40 + Math.random() * 30));
+    });
+    sensorChart.update();
+  }, 3000);
+</script>
+{% endblock %}

@@ -1,0 +1,121 @@
+/* === General Section Styling === */
+section {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* === Headings === */
+h2, h3, h4 {
+  color: #145a32;
+}
+
+/* === Crop Shelter Image (main) === */
+.img-fluid {
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 2px solid #198754;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* === Uniform Image Gallery === */
+.uniform-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ccc;
+}
+
+/* === Accordion (FAQ) === */
+.accordion-button:not(.collapsed) {
+  background-color: #d1f2eb;
+  color: #0f5132;
+  font-weight: 600;
+}
+
+.accordion-body {
+  background-color: #f9f9f9;
+  font-size: 0.95rem;
+}
+
+/* === Modal Styling === */
+.modal-content {
+  border-radius: 1rem;
+  border: 1px solid #ced4da;
+  padding: 1rem;
+}
+
+.modal-body p {
+  font-size: 0.95rem;
+}
+
+/* === Cards (Shelter Types) === */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+.card-title {
+  color: #145a32;
+  font-weight: 600;
+}
+
+/* === YouTube Section === */
+.ratio iframe {
+  border-radius: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.mt-2.text-center {
+  font-size: 0.95rem;
+}
+
+/* === Button (Modal Trigger) === */
+.btn-outline-success {
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem;
+}
+
+/* === Government Subsidy Info === */
+.mt-5 p {
+  background-color: #fff8dc;
+  padding: 15px 20px;
+  border-left: 5px solid #FFD700;
+  border-radius: 5px;
+  font-size: 1.05rem;
+}
+
+/* === Responsive Fixes === */
+@media (max-width: 768px) {
+  h2, h3, h4 {
+    font-size: 1.4rem;
+  }
+
+  .img-fluid {
+    max-height: 250px;
+  }
+
+  .uniform-img {
+    height: 180px;
+  }
+
+  .mt-5 p, .accordion-body, .card-text {
+    font-size: 0.9rem;
+  }
+}
+

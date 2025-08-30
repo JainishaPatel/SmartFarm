@@ -1,0 +1,33 @@
+# Environment variables
+.env
+*.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# OS / Editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Databases
+*.sqlite3
+db.sqlite3
+
+# Cache
+.pytest_cache/
+instance/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Model files (optional if large)
+*.pkl

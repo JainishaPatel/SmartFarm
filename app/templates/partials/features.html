@@ -1,0 +1,142 @@
+<section id="features" class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <h2 class="fw-bold">Website Features</h2>
+      <p class="text-muted">Helping farmers with real-world solutions</p>
+    </div>
+    <div class="row g-4">
+
+      <!-- Crop Guide -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.crop_guide') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-seedling fa-2x mb-3 text-primary"></i>
+            <h5>Crop Guide</h5>
+            <p>Know which crop to grow each season.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Weather Updates -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.weather_input') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-cloud-sun fa-2x mb-3 text-primary"></i>
+            <h5>Weather Updates</h5>
+            <p>Live weather and alerts for your region.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Market Rates -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.market_rates') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-sack-dollar fa-2x mb-3 text-primary"></i>
+            <h5>Market Rates</h5>
+            <p>Current mandi prices for crops.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Soil Analysis -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.soil_analysis') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-flask fa-2x mb-3 text-primary"></i>
+            <h5>Soil Analysis</h5>
+            <p>Check your soil type and fertility.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Marketplace -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.market_place') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-bag-shopping fa-2x mb-3 text-primary"></i>
+            <h5>Sell</h5>
+            <p>E-commerce for grain.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Farming Input Store -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.store') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-seedling fa-2x mb-3 text-primary"></i>
+            <h5>Farming Input Store</h5>
+            <p>Buy fertilizers, seeds, tools, and more.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Govt. Schemes -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.schemes') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-building-columns fa-2x mb-3 text-primary"></i>
+            <h5>Govt. Schemes</h5>
+            <p>Know about subsidies & Yojanas.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Machine Rentals -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.machine_rentals') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-tractor fa-2x mb-3 text-primary"></i>
+            <h5>Machine Rentals</h5>
+            <p>Book tractors and tools nearby.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pest Management -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.pest_management') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-bug-slash fa-2x mb-3 text-primary"></i>
+            <h5>Pest Management</h5>
+            <p>Detect and manage pests early.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Crop Shelter -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.crop_shelter') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-tree fa-2x mb-3 text-primary"></i>
+            <h5>Crop Shelter</h5>
+            <p>Protect your yield in extreme weather.</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Multi-language -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <i class="fa-solid fa-language fa-2x mb-3 text-primary"></i>
+          <h5>Multi-language</h5>
+          <p>Supports Hindi, English, more.</p>
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+
+      <!-- IoT Dashboard -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <a href="{{ url_for('main.iot_dashboard') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-microchip fa-2x mb-3 text-primary"></i>
+            <h5>IoT Dashboard</h5>
+            <p>Live sensor data for soil, temperature, and moisture monitoring.</p>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

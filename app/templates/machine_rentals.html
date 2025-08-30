@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Machine Rentals - SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/machine_rentals.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container my-5">
+  <h2 class="text-center mb-4">🚜 Machine Rentals</h2>
+  <p class="text-center text-muted">Book farming machines and tools available near you</p>
+
+  <div class="row g-4 mt-4">
+    {% for machine in machines %}
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100 machine-card">
+        <img src="{{ url_for('static', filename=machine.image) }}" class="card-img-top" alt="{{ machine.name }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ machine.name }}</h5>
+          <p class="card-text">{{ machine.description }}</p>
+          <button class="btn btn-primary w-100 book-btn" data-name="{{ machine.name }}">Book Now</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book Machine</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="bookingForm">
+        <div class="modal-body">
+          <input type="hidden" id="machineName" name="machine_name">
+          <div class="mb-3">
+            <label for="farmerName" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="farmerName" name="farmer_name" required>
+          </div>
+          <div class="mb-3">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input type="tel" class="form-control" id="contactNumber" name="contact_number" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary w-100">Submit Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <div class="mt-5 text-center">
+    <a href="https://agriinfra.dac.gov.in/MachineBank" target="_blank" class="btn btn-outline-success">
+      🌐 Govt Machine Rental Portal
+    </a>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/machine_rentals.js') }}" defer></script>
+{% endblock %}
+
+
+

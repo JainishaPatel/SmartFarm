@@ -1,0 +1,19 @@
+.market-section {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.market-section h2 {
+  font-weight: 600;
+  color: #023E7D;
+}
+
+.table thead th {
+  background-color: #d1e7dd;
+  color: #001233;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f3f5;
+}
