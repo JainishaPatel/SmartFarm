@@ -1,18 +1,178 @@
-.crop-form {
-  background-color: #fefefe;
-  border-left: 4px solid #0466C8;
-  margin-bottom: 30px;
+/* ============================================ */
+/* Crop Guide Page Styles for SmartFarm         */
+/* ============================================ */
+
+
+
+
+/* Headings */
+h1 {
+    margin: 30px auto;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #0466C8; /* primary brand color */
 }
 
-.crop-form input,
-.crop-form select {
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: 0.3s ease;
+h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #023E7D;
 }
 
-.crop-form input:focus,
-.crop-form select:focus {
-  border-color: #0353A4;
-  box-shadow: 0 0 6px rgba(3, 83, 164, 0.3);
+p{
+    font-size: 1.27rem;
+    font-weight: 500;
+}
+
+i{
+    color: #0466C8;
+}
+
+/* Manual Form */
+.predict-form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 15px;
+}
+
+.predict-form label {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #001845;
+    text-align: left;
+}
+
+.predict-form input,
+.predict-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.predict-form input:focus,
+.predict-form select:focus {
+    border-color: #0466C8;
+    box-shadow: 0 0 8px rgba(4, 102, 200, 0.3);
+    outline: none;
+}
+
+/* Buttons */
+.predict-form button,
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+    border: 2px solid #0466C8;
+    background-color: transparent;
+    color: #0466C8;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0466C8;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #0353A4;
+    color: #fff;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #023E7D;
+}
+
+/* Auto Prediction Section */
+.auto-predict-section {
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #e7f0fd;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+#status {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #001845;
+    margin-bottom: 15px;
+}
+
+
+#prediction{
+    width: 50%;
+    max-width: 50%;
+    margin: auto;
+    padding: 20px 25px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e7f0fd, #ffffff);
+    border: 2px solid #0466C8;
+    color: #023E7D;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(4, 102, 200, 0.15);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-line; /* preserves line breaks */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover/Focus animation effect */
+#prediction:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(4, 102, 200, 0.25);
+}
+
+
+
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.6rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+    p{
+        font-size: 1.1rem;
+    }
+    .predict-form input,
+    .predict-form select {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+    .btn {
+        font-size: 0.95rem;
+        padding: 10px 16px;
+    }
+    #prediction {
+        font-size: 1rem;
+        padding: 15px 20px;
+    }
+}
+
+/* Extra Polish: Hover effects for links */
+a.btn {
+    text-decoration: none;
 }

@@ -1,75 +1,39 @@
-// contact.js
-
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("#contactForm");
+  const form = document.getElementById("contactForm");
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
 
-  if (!form) return;
+  form.addEventListener("submit", (e) => {
+    // Clear previous errors
+    document.getElementById("nameError").style.display = "none";
+    document.getElementById("emailError").style.display = "none";
+    document.getElementById("messageError").style.display = "none";
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const name = document.querySelector("#name");
-    const email = document.querySelector("#email");
-    const message = document.querySelector("#message");
-
-    let isValid = true;
+    let valid = true;
 
     // Name validation
     if (!name.value.trim()) {
-      showError("name");
-      isValid = false;
-    } else {
-      hideError("name");
+      document.getElementById("nameError").style.display = "block";
+      valid = false;
     }
 
-    // Email validation (basic pattern check)
+    // Email validation (basic regex)
     const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if (!email.value.trim() || !emailPattern.test(email.value)) {
-      showError("email");
-      isValid = false;
-    } else {
-      hideError("email");
+    if (!email.value.trim() || !emailPattern.test(email.value.trim())) {
+      document.getElementById("emailError").style.display = "block";
+      valid = false;
     }
 
     // Message validation
     if (!message.value.trim()) {
-      showError("message");
-      isValid = false;
-    } else {
-      hideError("message");
+      document.getElementById("messageError").style.display = "block";
+      valid = false;
     }
 
-    if (isValid) {
-      alert("Message sent successfully!");
-      form.reset(); // clear form
+    if (!valid) {
+      e.preventDefault(); // Stop submission if validation fails
     }
+    // If valid, form submits normally to Flask /contact route
   });
-
-  function showError(field) {
-    document.querySelector(`#${field}`).classList.add("is-invalid");
-    document.querySelector(`#${field}Error`).style.display = "block";
-  }
-
-  function hideError(field) {
-    document.querySelector(`#${field}`).classList.remove("is-invalid");
-    document.querySelector(`#${field}Error`).style.display = "none";
-  }
 });
-
-
-// Optional: Simple toast message function
-function showToast(message, type = "success") {
-  const toast = document.createElement("div");
-  toast.textContent = message;
-  toast.className = `custom-toast ${type}`;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.classList.add("visible");
-  }, 100);
-
-  setTimeout(() => {
-    toast.classList.remove("visible");
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
-}

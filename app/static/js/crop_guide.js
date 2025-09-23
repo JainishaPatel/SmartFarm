@@ -1,32 +1,34 @@
-async function fetchWeather(event) {
-  event.preventDefault();
-
-  const season = document.getElementById("auto_season").value;
-
-  if (!season) {
-    alert("Please select a season.");
-    return;
-  }
-
-  try {
-    const res = await fetch("/api/weather");  // 👈 Call your Flask route instead of external API
-
-     if (!res.ok) {
-      const errData = await res.json(); // try to parse JSON error
-      throw new Error(errData.error || "Unknown API error");
+async function predictCrop() {
+    if (!navigator.geolocation) {
+        alert("Geolocation not supported. Please enter manually.");
+        return;
     }
 
-    const data = await res.json();
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
 
-    document.getElementById("auto_temp").value = data.current.temp_c;
-    document.getElementById("auto_humidity").value = data.current.humidity;
-    document.getElementById("auto_rain").value = data.current.precip_mm;
-    document.getElementById("auto_state").value = data.location.region || "Jammu and Kashmir";
+        try {
+            const response = await fetch("/predict_auto", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ lat, lon })
+            });
 
-    document.getElementById("autoForm").submit();
+            const data = await response.json();
 
-  } catch (err) {
-    console.error("❌ JS Fetch Error:", err);
-    alert("JS Fetch error: " + err.message);
-  }
+            if (data.error) {
+                document.getElementById("prediction").innerText = "Error: " + data.error;
+            } else {
+                document.getElementById("prediction").innerText = `🌱 Recommended Crop: ${data.prediction}\n🌡 Temp: ${data.temperature}°C\n💧 Humidity: ${data.humidity}%`;
+            }
+        } catch (err) {
+            document.getElementById("prediction").innerText = "Network error: " + err;
+        }
+    }, (err) => {
+        alert("Geolocation denied or unavailable. Please enter manually.");
+    });
 }
+
+// Call automatically on page load
+window.addEventListener("DOMContentLoaded", predictCrop);

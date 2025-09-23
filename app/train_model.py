@@ -1,45 +1,56 @@
 import os
+import pickle
 import pandas as pd
 from dotenv import load_dotenv
-import pickle
+from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import accuracy_score, classification_report
 
+# === Load environment variables ===
 load_dotenv()
+CSV_PATH = os.getenv("DATASET_PATH", "crop_data_india.csv")  # fallback if not set
 
-DATA_PATH = os.getenv("DATASET_PATH")
+# === Load dataset ===
+if not os.path.exists(CSV_PATH):
+    raise FileNotFoundError(f"❌ CSV file not found at {CSV_PATH}. Please check your .env or path.")
 
-# 1. Load dataset
-df = pd.read_csv(DATA_PATH)
+df = pd.read_csv(CSV_PATH)
+print(f"✅ Loaded dataset from: {CSV_PATH}")
+print(f"📊 Shape: {df.shape}")
+print(f"🔎 Columns: {list(df.columns)}")
 
-# 2. Encode Season, State, and Crop using LabelEncoder
-season_encoder = LabelEncoder()
-state_encoder = LabelEncoder()
+# === Encode target column (Crop) ===
 crop_encoder = LabelEncoder()
-
-df['Season'] = season_encoder.fit_transform(df['Season'])
-df['State'] = state_encoder.fit_transform(df['State'])
 df['Crop'] = crop_encoder.fit_transform(df['Crop'])
 
-# 3. Define input features (X) and label (y)
-X = df[['Season', 'State', 'temperature', 'humidity', 'rainfall']]
+# === Features & Target ===
+X = df[['temperature', 'humidity']]   # 👉 Add more features later if needed
 y = df['Crop']
 
-# 4. Train model
-model = RandomForestClassifier()
-model.fit(X, y)
+# === Train-test split ===
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
 
-# 5. Save model and encoders
-with open("crop_model.pkl", "wb") as f:
+# === Train model ===
+model = RandomForestClassifier(
+    n_estimators=200,
+    max_depth=10,
+    random_state=42
+)
+model.fit(X_train, y_train)
+
+# === Evaluate ===
+y_pred = model.predict(X_test)
+print("✅ Accuracy:", accuracy_score(y_test, y_pred))
+print("\n📊 Classification Report:\n", classification_report(y_test, y_pred, target_names=crop_encoder.classes_))
+
+# === Save model & encoder ===
+with open('crop_model.pkl', 'wb') as f:
     pickle.dump(model, f)
 
-with open("season_encoder.pkl", "wb") as f:
-    pickle.dump(season_encoder, f)
-
-with open("state_encoder.pkl", "wb") as f:
-    pickle.dump(state_encoder, f)
-
-with open("crop_encoder.pkl", "wb") as f:
+with open('crop_encoder.pkl', 'wb') as f:
     pickle.dump(crop_encoder, f)
 
-print("✅ Model and encoders saved successfully.")
+print("💾 Model and encoder saved successfully.")

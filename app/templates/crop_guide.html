@@ -1,96 +1,132 @@
 {% extends "base.html" %}
 
-{% block title %}Crop Guide | SmartFarm{% endblock %}
+{% block title %}Crop Guide - SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/crop_guide.css') }}">
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/crop_guide.css') }}">
-<script src="{{ url_for('static', filename='js/crop_guide.js') }}"></script>
+<div class="container text-center crop-form-section">
+  <h1>🌱 Crop Prediction</h1>
 
-<section class="container my-5">
-  <h2 class="text-center mb-4">🌾 Crop Recommendation Guide</h2>
+  <!-- Manual Prediction Form -->
+  <form action="/crop_guide" method="POST" class="predict-form">
+      <label for="temperature">Temperature (°C):</label>
+      <input type="number" id="temperature" name="temperature" step="0.1" required>
 
-  <!-- Manual Entry -->
-  <div class="row">
-    <div class="col-md-6">
-      <h4>📝 Manual Prediction</h4>
-      <form action="{{ url_for('main.crop_guide') }}" method="POST" class="crop-form shadow p-4 rounded">
-        <input type="hidden" name="mode" value="manual">
-        <div class="mb-3">
-          <label for="season" class="form-label">Season</label>
-          <select name="season" id="season" class="form-select" required>
-            <option value="">Select Season</option>
-            <option value="Autumn">Autumn</option>
-            <option value="Kharif">Kharif</option>
-            <option value="Rabi">Rabi</option>
-            <option value="Summer">Summer</option>
-            <option value="Winter">Winter</option>
-          </select>
-        </div>
+      <label for="humidity">Humidity (%):</label>
+      <input type="number" id="humidity" name="humidity" step="0.1" required>
 
-        <div class="mb-3">
-          <label for="state" class="form-label">State</label>
-          <select name="state" id="state" class="form-select" required>
-            <option value="">Select State</option>
-            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-            <!-- Add more states -->
-          </select>
-        </div>
+      <label for="state">Select State:</label>
+      <select id="state" name="state" class="form-select" required>
+        <option value="" disabled selected>Select your state</option>
 
-        <div class="mb-3">
-          <label for="temperature" class="form-label">Temperature (°C)</label>
-          <input type="number" step="0.01" name="temperature" class="form-control" required>
-        </div>
+        <!-- States -->
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+        <option value="Assam">Assam</option>
+        <option value="Bihar">Bihar</option>
+        <option value="Chhattisgarh">Chhattisgarh</option>
+        <option value="Goa">Goa</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Himachal Pradesh">Himachal Pradesh</option>
+        <option value="Jharkhand">Jharkhand</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Manipur">Manipur</option>
+        <option value="Meghalaya">Meghalaya</option>
+        <option value="Mizoram">Mizoram</option>
+        <option value="Nagaland">Nagaland</option>
+        <option value="Odisha">Odisha</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Sikkim">Sikkim</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Tripura">Tripura</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Uttarakhand">Uttarakhand</option>
+        <option value="West Bengal">West Bengal</option>
 
-        <div class="mb-3">
-          <label for="humidity" class="form-label">Humidity (%)</label>
-          <input type="number" step="0.01" name="humidity" class="form-control" required>
-        </div>
+        <!-- Union Territories -->
+        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+        <option value="Chandigarh">Chandigarh</option>
+        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+        <option value="Ladakh">Ladakh</option>
+        <option value="Lakshadweep">Lakshadweep</option>
+        <option value="Puducherry">Puducherry</option>
+    </select>
 
-        <!-- <div class="mb-3">
-          <label for="rainfall" class="form-label">Rainfall (mm)</label>
-          <input type="number" step="0.01" name="rainfall" class="form-control" required>
-        </div> -->
+      <br>
+      <button type="submit" class="btn btn-outline-primary">Predict</button>
+  </form>
 
-        <button type="submit" class="btn btn-primary w-100">Predict Crop</button>
-      </form>
-    </div>
-
-    <!-- Auto Entry -->
-    <div class="col-md-6">
-      <h4>⚡ Automatic Prediction</h4>
-      <form action="{{ url_for('main.crop_guide') }}" method="POST" id="autoForm" class="crop-form shadow p-4 rounded">
-        <input type="hidden" name="mode" value="auto">
-        <div class="mb-3">
-          <label for="auto_season" class="form-label">Season</label>
-          <select name="season" id="auto_season" class="form-select" required>
-            <option value="">Select Season</option>
-            <option value="Autumn">Autumn</option>
-            <option value="Kharif">Kharif</option>
-            <option value="Rabi">Rabi</option>
-            <option value="Summer">Summer</option>
-            <option value="Winter">Winter</option>
-          </select>
-        </div>
-        <input type="hidden" name="state" id="auto_state">
-        <input type="hidden" name="temperature" id="auto_temp">
-        <input type="hidden" name="humidity" id="auto_humidity">
-        <input type="hidden" name="rainfall" id="auto_rain">
-
-        <button type="submit" class="btn btn-success w-100" onclick="fetchWeather(event)">
-          Auto Fetch & Predict
-        </button>
-
-    </div>
-  </div>
-
-  {% if predicted_crop %}
-    <div class="alert alert-success text-center mt-4">
-      🌱 <strong>Recommended Crop:</strong> {{ predicted_crop }}
-    </div>
+  {% if prediction %}
+      <h2>Prediction Result</h2>
+      <p><b>The predicted crop is:</b> <i>{{ prediction }}</i></p>
   {% endif %}
-</section>
+</div>
+
+<hr>
+
+<div class="container text-center auto-predict-section">
+  <h1>Automatic Crop Prediction</h1>
+  <p id="status"></p>
+  <div id="prediction">Detecting location and predicting crop...</div>
+  <p id="prediction-result"></p>
+  <a href="/" class="btn btn-primary mt-3">Back to Home Page</a>
+</div>
+
+
+
+
+
+
+<script>
+  async function predictCrop() {
+    if (!navigator.geolocation) {
+        alert("Geolocation not supported. Please enter manually.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        try {
+            const response = await fetch("/predict_auto", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ lat, lon })
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                document.getElementById("prediction").innerText = "Error: " + data.error;
+            } else {
+                document.getElementById("prediction").innerText = `🌱 Recommended Crop: ${data.prediction}\n🌡 Temp: ${data.temperature}°C\n💧 Humidity: ${data.humidity}%`;
+            }
+        } catch (err) {
+            document.getElementById("prediction").innerText = "Network error: " + err;
+        }
+    }, (err) => {
+        alert("Geolocation denied or unavailable. Please enter manually.");
+    });
+}
+
+// Call automatically on page load
+window.addEventListener("DOMContentLoaded", predictCrop);
+</script>
+
 {% endblock %}
 
-{% block scripts %}
+<!-- {% block extra_js %}
 <script src="{{ url_for('static', filename='js/crop_guide.js') }}"></script>
-{% endblock %}
+{% endblock %} -->

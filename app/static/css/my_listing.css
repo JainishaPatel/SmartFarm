@@ -1,0 +1,33 @@
+/* My Listings Page */
+
+h2 {
+  color: #023E7D;
+  font-weight: 700;
+}
+
+.card {
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.card h5 {
+  font-weight: 600;
+  color: #002855;
+}
+
+.card p {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.card .btn-danger {
+  border-radius: 6px;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+}

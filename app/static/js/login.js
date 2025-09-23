@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const passwordError = document.getElementById("passwordError");
   const togglePassword = document.getElementById("togglePassword");
   const eyeIcon = togglePassword.querySelector("i");
+  
 
   // Toggle password visibility
   togglePassword.addEventListener("click", function () {
@@ -13,6 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
     passwordInput.type = type;
     eyeIcon.classList.toggle("fa-eye");
     eyeIcon.classList.toggle("fa-eye-slash");
+  });
+
+  // Real-time error removal on input
+  emailInput.addEventListener("input", () => {
+    emailError.style.display = "none";
+    emailInput.classList.remove("is-invalid");
+  });
+
+  passwordInput.addEventListener("input", () => {
+    passwordError.style.display = "none";
+    passwordInput.classList.remove("is-invalid");
   });
 
   // Form validation
@@ -32,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Password validation
-    if (passwordInput.value.trim() === "") {
+    const passwordValue = passwordInput.value.trim();
+    if (passwordValue === "") {
       passwordError.style.display = "block";
       passwordInput.classList.add("is-invalid");
       isValid = false;
@@ -46,4 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
     }
   });
+
+
 });

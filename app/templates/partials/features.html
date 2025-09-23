@@ -28,6 +28,16 @@
         </div>
       </div>
 
+      <!-- Multi-language -->
+      <div class="col-md-4">
+        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+          <i class="fa-solid fa-language fa-2x mb-3 text-primary"></i>
+          <h5>Multi-language</h5>
+          <p>Supports Hindi, English, more.</p>
+          <div id="google_translate_element"></div>
+        </div>
+      </div>
+
       <!-- Market Rates -->
       <div class="col-md-4">
         <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
@@ -39,38 +49,29 @@
         </div>
       </div>
 
-      <!-- Soil Analysis -->
+      <!-- E-Commerce / Online Market -->
       <div class="col-md-4">
         <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.soil_analysis') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-flask fa-2x mb-3 text-primary"></i>
-            <h5>Soil Analysis</h5>
-            <p>Check your soil type and fertility.</p>
+          <a href="{{ url_for('main.e_commerce') }}" class="feature-link text-decoration-none text-dark">
+            <i class="fa-solid fa-cart-shopping fa-2x mb-3 text-primary"></i>
+            <h5>Online Market</h5>
+            <p>Buy seeds, tools, fertilizers, and more online.</p>
           </a>
         </div>
       </div>
 
-      <!-- Marketplace -->
-      <div class="col-md-4">
-        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.market_place') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-bag-shopping fa-2x mb-3 text-primary"></i>
-            <h5>Sell</h5>
-            <p>E-commerce for grain.</p>
-          </a>
-        </div>
+    <!-- Farmer Marketplace -->
+    <div class="col-md-4">
+      <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
+        <a href="{{ url_for('main.farmer_marketplace') }}" class="feature-link text-decoration-none text-dark">
+          <i class="fa-solid fa-store fa-2x mb-3 text-success"></i>
+          <h5>Farmer Marketplace</h5>
+          <p>Sell your crops and produce directly to other farmers and buyers.</p>
+        </a>
       </div>
+    </div>
 
-      <!-- Farming Input Store -->
-      <div class="col-md-4">
-        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.store') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-seedling fa-2x mb-3 text-primary"></i>
-            <h5>Farming Input Store</h5>
-            <p>Buy fertilizers, seeds, tools, and more.</p>
-          </a>
-        </div>
-      </div>
+    
 
       <!-- Govt. Schemes -->
       <div class="col-md-4">
@@ -83,27 +84,6 @@
         </div>
       </div>
 
-      <!-- Machine Rentals -->
-      <div class="col-md-4">
-        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.machine_rentals') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-tractor fa-2x mb-3 text-primary"></i>
-            <h5>Machine Rentals</h5>
-            <p>Book tractors and tools nearby.</p>
-          </a>
-        </div>
-      </div>
-
-      <!-- Pest Management -->
-      <div class="col-md-4">
-        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.pest_management') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-bug-slash fa-2x mb-3 text-primary"></i>
-            <h5>Pest Management</h5>
-            <p>Detect and manage pests early.</p>
-          </a>
-        </div>
-      </div>
 
       <!-- Crop Shelter -->
       <div class="col-md-4">
@@ -116,27 +96,23 @@
         </div>
       </div>
 
-      <!-- Multi-language -->
-      <div class="col-md-4">
-        <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <i class="fa-solid fa-language fa-2x mb-3 text-primary"></i>
-          <h5>Multi-language</h5>
-          <p>Supports Hindi, English, more.</p>
-          <div id="google_translate_element"></div>
-        </div>
-      </div>
 
-      <!-- IoT Dashboard -->
+      <!-- Chatbot -->
       <div class="col-md-4">
         <div class="feature-card text-center p-4 bg-white shadow-sm rounded">
-          <a href="{{ url_for('main.iot_dashboard') }}" class="feature-link text-decoration-none text-dark">
-            <i class="fa-solid fa-microchip fa-2x mb-3 text-primary"></i>
-            <h5>IoT Dashboard</h5>
-            <p>Live sensor data for soil, temperature, and moisture monitoring.</p>
-          </a>
+            <a href="{{ url_for('main.chatbot') }}" class="feature-link text-decoration-none text-dark">
+                <i class="fa-solid fa-robot fa-2x mb-3 text-primary"></i>
+                <h5>Smart Chatbot</h5>
+                <p>Get instant answers to farming queries and guidance 24/7.</p>
+            </a>
         </div>
-      </div>
+    </div>
+
 
     </div>
   </div>
 </section>
+
+
+
+ 

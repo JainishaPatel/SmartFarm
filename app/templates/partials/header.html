@@ -12,10 +12,14 @@
         <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a></li>
       </ul>
 
+      <br>
       <div class="d-flex">
-        <a href="{{ url_for('main.login') }}" class="btn btn-light text-primary fw-bold me-2">Login</a>
-        <a href="{{ url_for('main.signup') }}" class="btn btn-light text-primary fw-bold me-2">Signup</a>
-        <a href="{{ url_for('main.signout') }}" class="btn btn-danger fw-bold">Signout</a>
+        {% if session.get('logged_in') %}
+          <a href="{{ url_for('main.signout') }}" class="btn btn-danger fw-bold">Signout</a>
+        {% else %}
+          <a href="{{ url_for('main.login') }}" class="btn btn-light text-primary fw-bold me-2">Login</a>
+          <a href="{{ url_for('main.signup') }}" class="btn btn-light text-primary fw-bold me-2">Signup</a>
+        {% endif %}
       </div>
     </div>
   </div>

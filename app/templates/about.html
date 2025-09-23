@@ -8,32 +8,42 @@
 {% endblock %}
 
 {% block content %}
-<!-- About Section Content -->
-<section class="about-section py-5">
+<section class="about-section py-5 bg-light">
   <div class="container">
     <h2 class="text-center mb-4">About SmartFarm</h2>
     <p class="about-subtext text-center mb-5">
-      SmartFarm is a digital platform created to help farmers make smarter, data-driven decisions...
+      SmartFarm is a farmer-friendly digital platform that provides simple, practical tools. 
+      Our aim is to make farming easier by giving farmers access to information, 
+      resources, and marketplaces — all in one place.
     </p>
 
-    <div class="row text-center">
-      <div class="col-md-4 mb-4">
-        <div class="about-box bg-light p-4 rounded shadow">
-          <h4>📈 Data-Driven Farming</h4>
-          <p>Empowering farmers with actionable insights.</p>
-        </div>
+    <div class="row g-4 text-center">
+      <!-- Crop Guide -->
+      <div class="col-md-3 col-sm-6 fade-in">
+        <i class="fa-solid fa-seedling fa-2x text-primary mb-3"></i>
+        <h5>Crop Guide</h5>
+        <p class="small">Know which crop to grow each season.</p>
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="about-box bg-light p-4 rounded shadow">
-          <h4>🤝 Government Support</h4>
-          <p>Up-to-date schemes and subsidies.</p>
-        </div>
+
+      <!-- Weather Updates -->
+      <div class="col-md-3 col-sm-6 fade-in">
+        <i class="fa-solid fa-cloud-sun fa-2x text-success mb-3"></i>
+        <h5>Weather Updates</h5>
+        <p class="small">Live forecasts and alerts for your region.</p>
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="about-box bg-light p-4 rounded shadow">
-          <h4>🌿 Sustainable Practices</h4>
-          <p>Eco-friendly and profitable methods.</p>
-        </div>
+
+      <!-- Market & Marketplace -->
+      <div class="col-md-3 col-sm-6 fade-in">
+        <i class="fa-solid fa-store fa-2x text-warning mb-3"></i>
+        <h5>Market Access</h5>
+        <p class="small">Check mandi prices & sell crops directly.</p>
+      </div>
+
+      <!-- Govt. Schemes -->
+      <div class="col-md-3 col-sm-6 fade-in">
+        <i class="fa-solid fa-building-columns fa-2x text-danger mb-3"></i>
+        <h5>Govt. Schemes</h5>
+        <p class="small">Stay updated on subsidies and yojanas.</p>
       </div>
     </div>
   </div>

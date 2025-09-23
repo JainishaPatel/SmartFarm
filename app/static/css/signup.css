@@ -21,17 +21,29 @@
   gap: 15px;
 }
 
-.auth-form input {
+.auth-form input,
+.auth-form select{
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
 }
 
-.auth-form input:focus {
+.auth-form input:focus,
+.auth-form select:focus {
   outline: none;
   border-color: #0466c8;
   box-shadow: 0 0 5px rgba(4, 102, 200, 0.5);
+}
+
+.auth-form select {
+  cursor: pointer;
+  color: #333;
+}
+
+.auth-form select option {
+  color: #333;
+  background: #fff;
 }
 
 .auth-form button {

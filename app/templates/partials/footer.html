@@ -1,5 +1,41 @@
-<footer class="text-white bg-dark py-4">
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2025 SmartFarm. All Rights Reserved.</p>
+<footer>
+  <div class="footer-top py-5">
+    <div class="container">
+      <div class="row">
+
+        <!-- About -->
+        <div class="col-md-4 mb-4 text-center">
+          <h5>About SmartFarm</h5>
+          <p>SmartFarm helps farmers with crop guides, market rates, weather info, and a local marketplace. Your digital companion for smarter farming!</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-4 mb-4 text-center">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li><a href="{{ url_for('main.crop_guide') }}">Crop Guide</a></li>
+            <li><a href="{{ url_for('main.market_rates') }}">Market Rates</a></li>
+            <li><a href="{{ url_for('main.e_commerce') }}">Store</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-md-4 mb-4 text-center">
+          <h5>Contact Us</h5>
+          <p>Email: support@smartfarm.com</p>
+          <p>Phone: +91 98765 43210</p>
+          <div class="social-icons mt-3">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom text-center py-3">
+    <p>&copy; 2025 SmartFarm. All Rights Reserved.</p>
   </div>
 </footer>

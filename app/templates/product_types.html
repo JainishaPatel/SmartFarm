@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product_name }} Types - SmartFarm{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_types.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2 class="text-center mb-4">{{ product_name }} Types</h2>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4">
+        <form method="POST" action="{{ url_for('main.order_form') }}">
+          <input type="hidden" name="product" value="{{ product_name }}">
+
+          <!-- Dropdown with categories using optgroup -->
+          <div class="mb-3">
+            <label class="form-label">Select {{ product_name }} Type</label>
+            <select name="subtype" class="form-select form-select-lg" required>
+              <option value="" disabled selected>Choose a type...</option>
+              {% for category, items in types.items() %}
+                <optgroup label="{{ category }}">
+                  {% for item in items %}
+                    <option value="{{ item }}">{{ item }}</option>
+                  {% endfor %}
+                </optgroup>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control form-control-lg" name="name" value="{{ session.get('user_name', '') }}"  required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control form-control-lg" name="phone" pattern="[0-9]{10}" value="{{ session.get('user_phone', '') }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control form-control-lg" name="email" value="{{ session.get('user_email', '') }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <textarea class="form-control form-control-lg" name="address" rows="3" value="{{ session.get('user_address', '') }}" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <div class="d-flex gap-2">
+              <input type="number" class="form-control form-control-lg" name="quantity" value="1" min="1" required>
+              <select name="unit" class="form-select form-select-lg" required>
+                {% if product_name in ['Seed', 'Fertilizer'] %}
+                  <option value="kg">kg</option>
+                  <option value="packet">packet</option>
+                  <option value="bag">bag</option>
+                {% elif product_name == 'Pesticide' %}
+                  <option value="ml">ml</option>
+                  <option value="L">L</option>
+                  <option value="bottle">bottle</option>
+                {% else %}
+                  <option value="unit">unit</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-success btn-lg w-100">
+            Book Order (Cash on Delivery)
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Define units for each product type
+  const units = {
+    "Seeds": ["kg", "packet", "bag"],
+    "Fertilizers": ["kg", "packet", "bag"],
+    "Pesticides": ["ml", "L", "bottle"]
+  };
+
+  // Get product name from Flask
+  const productName = "{{ product_name }}";
+
+  // Get the unit dropdown
+  const unitSelect = document.querySelector('select[name="unit"]');
+
+  // Populate the unit dropdown dynamically
+  if (units[productName] && unitSelect) {
+    unitSelect.innerHTML = ""; // Clear existing options
+    units[productName].forEach(u => {
+      const option = document.createElement("option");
+      option.value = u;
+      option.textContent = u;
+      unitSelect.appendChild(option);
+    });
+  }
+});
+</script>
+{% endblock %}
+
+

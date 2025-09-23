@@ -100,6 +100,55 @@ h2, h3, h4 {
   font-size: 1.05rem;
 }
 
+/* ===== YouTube Videos Section ===== */
+.youtube-section {
+  padding: 60px 20px;
+  margin-top: 50px;
+  background-color: #f8f9fa; /* light background */
+  border-radius: 15px;
+  text-align: center;
+}
+
+.youtube-section h3 {
+  color: #023E7D;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.youtube-section p {
+  color: #444;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* YouTube Search Button */
+.youtube-section .btn-youtube {
+  background-color: #0466C8;
+  border-color: #0466C8;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.youtube-section .btn-youtube:hover {
+  background-color: #0353A4;
+  border-color: #0353A4;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(4, 102, 200, 0.3);
+}
+
+
 /* === Responsive Fixes === */
 @media (max-width: 768px) {
   h2, h3, h4 {
@@ -116,6 +165,16 @@ h2, h3, h4 {
 
   .mt-5 p, .accordion-body, .card-text {
     font-size: 0.9rem;
+  }
+
+  .youtube-section h3 {
+    font-size: 1.7rem;
+  }
+
+  .youtube-section .btn-youtube {
+    width: 90%;
+    font-size: 1rem;
+    padding: 10px 20px;
   }
 }
 

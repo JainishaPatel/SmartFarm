@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const togglePassword = document.getElementById("togglePassword");
   const eyeIcon = togglePassword.querySelector("i");
 
+  const googleBtn = document.getElementById("googleSignupBtn");
+
   // Toggle password visibility
   togglePassword.addEventListener("click", () => {
     const type = passwordInput.type === "password" ? "text" : "password";
@@ -59,4 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault(); // Stop form submission
     }
   });
+
+  // Google Signup redirect
+  googleBtn.addEventListener("click", function () {
+    window.location.href = "{{ url_for('google.login') }}";
+  });
+  
 });

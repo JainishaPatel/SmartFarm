@@ -10,6 +10,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 Free -->
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
 
   <!-- Global CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -25,8 +28,25 @@
 
   {% include 'partials/header.html' %}
 
-  <!-- Page-specific content -->
-  {% block content %}{% endblock %}
+  <!-- Flash Messages at Top -->
+  <div class="flash-messages position-fixed top-0 start-50 translate-middle-x w-100 p-3" style="z-index: 1050;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show mx-auto" role="alert" style="max-width: 600px;">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+
+  <!-- Wrap main content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
   {% include 'partials/footer.html' %}
 
