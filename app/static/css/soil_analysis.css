@@ -1,4 +1,4 @@
- .soil-list {
+ /* .soil-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -33,5 +33,5 @@
   max-width: 500px;
   height: auto;
   display: block;
-  margin: 0 auto; /* optional: center image */
-}
+  margin: 0 auto; /* optional: center image 
+} */

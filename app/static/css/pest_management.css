@@ -1,4 +1,4 @@
-/* Pest Management Styles */
+/* Pest Management Styles
 
 .pest-card img {
   height: 180px;
@@ -15,12 +15,12 @@
   max-width: 500px;
 }
 
-/* No Results */
+/* No Results 
 #noResults {
   font-size: 1.1rem;
 }
 
-/* Responsive */
+/* Responsive 
 @media (max-width: 768px) {
   .pest-card img {
     height: 150px;
@@ -28,4 +28,4 @@
   #pestSearch {
     width: 90% !important;
   }
-}
+} */
