@@ -19,6 +19,7 @@ label {
 }
 
 .btn-primary {
+    margin: 20px auto;
     background-color: #0466C8;
     border-color: #0466C8;
     transition: 0.3s;
@@ -60,6 +61,25 @@ table tbody tr:hover {
     text-align: center;
     font-style: italic;
     color: #555;
+}
+
+.custom-btn {
+    padding: 12px 50px; /* vertical | horizontal */
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #FF7E5F, #FD3A69); /* Warm gradient */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.custom-btn:hover {
+    background: linear-gradient(135deg, #FD3A69, #FF7E5F); /* Reverse gradient on hover */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    transform: translateY(-2px);
 }
 
 /* Responsive */

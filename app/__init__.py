@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from flask_dance.contrib.google import make_google_blueprint
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 # Load environment variables from .env
@@ -28,6 +28,7 @@ google_bp = make_google_blueprint(
     redirect_to="main.google_login_callback"  # Flask route name
 )
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -44,6 +45,28 @@ def create_app():
     from .routes import main
     app.register_blueprint(main)
     app.register_blueprint(google_bp, url_prefix="/login")  # Google OAuth
+
+
+    # Jinja2 filter for INR formatting
+    def inr_format(value):
+        value = int(round(value))  # remove decimal part
+        s = str(value)  # convert to string without commas
+        if len(s) <= 3:
+            return f"₹ {s}"
+
+        # Indian-style formatting
+        last3 = s[-3:]
+        rest = s[:-3]
+        parts = []
+        while len(rest) > 2:
+            parts.insert(0, rest[-2:])
+            rest = rest[:-2]
+        if rest:
+            parts.insert(0, rest)
+        indian_format = ','.join(parts + [last3])
+        return f"₹ {indian_format}"
+
+    app.jinja_env.filters['inr'] = inr_format
 
 
     # Global 404 handler

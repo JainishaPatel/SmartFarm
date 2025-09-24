@@ -24,13 +24,13 @@
         <form id="listing-form" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label class="form-label">Crop Name</label>
-            <input type="text" class="form-control" name="crop_name" id="crop_name" required>
+            <input type="text" class="form-control" name="crop_name" id="crop_name" placeholder="Enter crop name" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Quantity</label>
             <div class="d-flex gap-2">
-              <input type="number" class="form-control" name="quantity" id="quantity" min="0" required>
+              <input type="number" class="form-control" name="quantity" id="quantity" min="0" placeholder="Enter quantity"  required>
               <select name="unit" id="unit" class="form-select">
                 <option value="kg">kg</option>
                 <option value="packet">packet</option>
@@ -41,12 +41,12 @@
 
           <div class="mb-3">
             <label class="form-label">Price (₹)</label>
-            <input type="number" class="form-control" name="price" id="price" min="0" required>
+            <input type="number" class="form-control" name="price" id="price" min="0" placeholder="Enter price per kg" required>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Location</label>
-            <input type="text" class="form-control" name="location" id="location" required>
+            <input type="text" class="form-control" name="location" id="location" placeholder="Enter location" required>
           </div>
 
           <!-- Seller Name -->
@@ -67,13 +67,15 @@
 
           <div class="mb-3">
             <label class="form-label">Description</label>
-            <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Add description about the crop"></textarea>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Upload Image (optional)</label>
             <input type="file" class="form-control" name="image" id="image" accept="image/*">
           </div>
+
+          <br>
 
           <button type="submit" class="btn btn-success">Add Listing</button>
         </form>
@@ -132,7 +134,16 @@ function updateQuantity() {
 quantityInput.addEventListener('input', updateQuantity);
 unitInput.addEventListener('change', updateQuantity);
 
-priceInput.addEventListener('input', () => previewPrice.textContent = 'Price: ₹' + (priceInput.value || '0'));
+function updatePrice() {
+  const unit = unitInput.value || 'kg';
+  const price = priceInput.value || '0';
+  previewPrice.textContent = `Price: ₹${price} / ${unit}`;
+}
+
+// Listen for changes
+priceInput.addEventListener('input', updatePrice);
+unitInput.addEventListener('change', updatePrice);
+
 locationInput.addEventListener('input', () => previewLocation.textContent = locationInput.value || 'Location');
 descriptionInput.addEventListener('input', () => previewDesc.textContent = descriptionInput.value || 'Description');
 

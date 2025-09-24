@@ -30,8 +30,15 @@
       </div>
       {% endfor %}
     </div>
+
+<div class="text-center mt-3">
+  <a href="{{ url_for('main.farmer_marketplace') }}" class="btn btn-primary custom-btn">Back to Home Page</a>
+</div>
+
   {% else %}
     <div class="text-center py-5 text-muted">You have no listings yet. <a href="{{ url_for('main.add_listing') }}">Add one</a>.</div>
   {% endif %}
 </div>
+
+
 {% endblock %}

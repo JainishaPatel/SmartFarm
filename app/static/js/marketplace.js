@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <img src="${imgUrl}" class="card-img-top" alt="${l.crop_name || 'No Image'}">
               <div class="card-body">
                 <h5 class="card-title">${l.crop_name}</h5>
-                <p class="card-text">Qty: ${l.quantity} ${l.unit || 'kg'} | Price: ₹${l.price}</p>
+                <p class="card-text">Qty: ${l.quantity} ${l.unit || 'kg'} | Price: ₹${l.price} / ${l.unit}</p>
                 <p class="card-text"><small class="text-muted">${l.location}</small></p>
               </div>
               <div class="card-footer text-end">
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="${data.image_url || '/static/assets/default.png'}" 
            class="modal-img-small">
       <p><strong>Quantity:</strong> ${data.quantity} ${data.unit || 'kg'}</p>
-      <p><strong>Price:</strong> ₹${data.price}</p>
+      <p><strong>Price:</strong> ₹${data.price} / ${data.unit}</p>
       <p><strong>Location:</strong> ${data.location}</p>
       <p><strong>Seller:</strong> ${data.seller_name || '-'}</p>
       <p><strong>Contact:</strong> ${data.contact || data.seller_email || '-'}</p>

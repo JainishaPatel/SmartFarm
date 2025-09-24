@@ -5,6 +5,8 @@ import requests
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 import re
+import cloudinary
+import cloudinary.uploader
 
 
 from datetime import datetime, timedelta
@@ -16,6 +18,9 @@ from dotenv import load_dotenv
 from . import mongo
 from .middleware import login_required, roles_required
 from flask_dance.contrib.google import google
+
+from bson.json_util import dumps
+import json
 
 
 
@@ -34,6 +39,13 @@ DATA_PATH = os.getenv("PRICES_DATASET_PATH")
 
 # Now you can access keys safely
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
+
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
 
 
 
@@ -658,6 +670,17 @@ def order_form():
     except ValueError:
         flash("⚠️ Quantity must be a number.", "danger")
         return redirect(request.referrer or url_for('main.e_commerce'))
+    
+    # Price per unit mapping
+    unit_prices = {
+        "Seeds": {"kg": 50, "packet": 10, "bag": 400},
+        "Fertilizers": {"kg": 60, "packet": 15, "bag": 450},
+        "Pesticides": {"ml": 5, "L": 400, "bottle": 250}
+    }
+
+    # Get price per unit and total price
+    price_per_unit = unit_prices.get(product, {}).get(unit, 0)
+    total_price = price_per_unit * quantity_value
 
     # Prepare order data
     order_data = {
@@ -669,6 +692,8 @@ def order_form():
         "address": address,
         "quantity": quantity_value,
         "unit": unit,
+        "price_per_unit": price_per_unit,
+        "total_price": total_price,
         "status": "Booked",
         "created_at": datetime.utcnow()
     }
@@ -737,7 +762,7 @@ def api_listings():
             if d.get("created_at"):
                 d["created_at"] = d["created_at"].isoformat()
 
-        return jsonify(docs)
+        return jsonify(json.loads(dumps(docs)))
 
     except Exception as e:
         print("API listings error:", e)
@@ -767,19 +792,15 @@ def add_listing():
         location = request.form.get("location", "").strip()
         description = request.form.get("description", "").strip()
 
-        # Image upload handling (optional)
+        # Inside add_listing
         file = request.files.get("image")
-        image_url = url_for("static", filename="images/default_crop.jpg")
         if file and file.filename != "":
-            from werkzeug.utils import secure_filename
-            import os
-            filename = secure_filename(file.filename)
-            timestamp = int(datetime.utcnow().timestamp())
-            saved_name = f"{timestamp}_{filename}"
-            upload_dir = os.path.join(current_app.static_folder, "uploads")
-            os.makedirs(upload_dir, exist_ok=True)
-            file.save(os.path.join(upload_dir, saved_name))
-            image_url = url_for("static", filename=f"uploads/{saved_name}")
+            upload_result = cloudinary.uploader.upload(file, folder="farmer_marketplace")
+            image_url = upload_result.get("secure_url")
+            public_id = upload_result.get("public_id")
+        else:
+            image_url = url_for("static", filename="assets/default_crop.jpg")
+
 
         doc = {
             "crop_name": crop_name,
@@ -790,6 +811,7 @@ def add_listing():
             "location": location,
             "description": description,
             "image_url": image_url,
+            "public_id": public_id,  
             "seller_name": session.get("user_name", "Anonymous"),
             "seller_email": session.get("user_email"),
             "created_at": datetime.utcnow()
@@ -841,19 +863,17 @@ def delete_listing(listing_id):
             flash("Not authorized to delete this listing.", "danger")
             return redirect(url_for("main.my_listings"))
 
-        # Optionally remove image file
-        img_url = doc.get("image_url", "")
-        try:
-            if img_url and img_url.startswith("/static/uploads/"):
-                import os
-                filename = img_url.split("/static/uploads/")[-1]
-                path = os.path.join(current_app.static_folder, "uploads", filename)
-                if os.path.exists(path):
-                    os.remove(path)
-        except Exception as e:
-            print("Could not remove image file:", e)
+        # Remove image from Cloudinary
+        public_id = doc.get("public_id")
+        if public_id:
+            try:
+                cloudinary.uploader.destroy(public_id)
+            except Exception as e:
+                print("Cloudinary delete failed:", e)
 
+        # Delete document from MongoDB
         mongo.db.marketplace.delete_one({"_id": ObjectId(listing_id)})
+
         flash("Listing deleted successfully.", "success")
         return redirect(url_for("main.my_listings"))
 

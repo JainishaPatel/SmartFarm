@@ -12,7 +12,7 @@
     <h2>Market Rates</h2>
     
     <!-- Filter Form -->
-    <form method="POST" class="row g-3 mb-4">
+    <form method="POST" class="row g-3 mb-4 justify-content-center">
         <div class="col-md-3">
             <label for="state">State</label>
             <select name="state" id="state" class="form-select">
@@ -40,11 +40,14 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="col-12">
+        <div class="col-6 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
-    </form>
 
+        <div class="col-6 d-flex justify-content-center">
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary custom-btn">Back to Home Page</a>
+        </div>
+    </form>
     <!-- Market Rates Table -->
     <table class="table table-striped">
         <thead>
@@ -68,7 +71,7 @@
                         <td>{{ r['District Name'] }}</td>
                         <td>{{ r['Commodity'] }}</td>
                         <td>{{ r['Date'] }}</td>
-                        <td>{{ "%.2f"|format(r['Modal_Price']) }}</td>
+                        <td>{{ r['Modal_Price'] | inr }}</td>
                     </tr>
                 {% endfor %}
             {% endif %}

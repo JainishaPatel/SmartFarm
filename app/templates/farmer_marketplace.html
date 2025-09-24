@@ -20,6 +20,10 @@
         <a href="{{ url_for('main.add_listing') }}" class="btn btn-primary me-2 mb-2 mb-md-0">+ Add Listing</a>
         <a href="{{ url_for('main.my_listings') }}" class="btn btn-outline-secondary">My Listings</a>
       </div>
+      
+      <div class="text-center mt-3">
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary custom-btn">Back to Home Page</a>
+      </div>
     </div>
 
     <!-- Search + Note -->
@@ -48,7 +52,8 @@
         <div class="listing-card-title">{{ item.product }}</div>
         <div class="listing-card-subtitle">Seller: {{ item.seller_name }}</div>
         <div class="listing-card-location">{{ item.location }}</div>
-        <div class="listing-card-quantity">Qty: {{ item.quantity }} {{ item.unit or 'kg'}}</div>
+        <div class="listing-card-price">Price: ₹{{ item.price }} / {{ item.unit or 'kg' }}</div>
+
 
         <button class="btn btn-sm btn-outline-primary mt-2 view-details-btn"
                 data-bs-toggle="modal" 
