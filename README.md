@@ -25,5 +25,22 @@ It provides **crop guidance, real-time weather, market prices, online marketplac
 - **Cloud Storage:** Cloudinary (for images)  
 - **APIs:** Weather API (for live updates & auto predictions) 
 
-
 -----
+
+## ⚙️ Set Up Environment Variables
+Create a **.env** file in the root directory of the project and add the following:
+
+- **WEATHER_API_KEY**=your_weather_api_key
+- **SECRET_KEY**=your_flask_secret_key
+- **DATASET_PATH**=path_to_your_crop_dataset_csv
+- **PRICES_DATASET_PATH**=path_to_your_market_prices_csv
+- **MONGO_URI**=your_mongodb_connection_uri
+- **MONGO_DB**=your_mongodb_database_name
+- **ADMIN_NAME**=your_admin_username
+- **ADMIN_EMAIL**=your_admin_email
+- **ADMIN_PASSWORD**=your_admin_password
+- **GOOGLE_CLIENT_ID**=your_google_client_id
+- **GOOGLE_CLIENT_SECRET**=your_google_client_secret
+- **CLOUDINARY_CLOUD_NAME**=your_cloudinary_cloud_name
+- **CLOUDINARY_API_KEY**=your_cloudinary_api_key
+- **CLOUDINARY_API_SECRET**=your_cloudinary_api_secret
